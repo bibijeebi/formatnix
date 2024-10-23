@@ -1,0 +1,44 @@
+Test suite formatnix-test: RUNNING...
+
+NixParser
+  basic parsing
+    parses simple strings [✔]
+    parses simple lists [✔]
+    parses simple attribute sets [✔]
+    parses boolean values [✔]
+    parses null [✔]
+    parses paths [✘]
+    parses let expressions [✘]
+    parses with expressions [✔]
+  error handling
+    fails on invalid syntax [✔]
+    fails on unclosed string [✔]
+  formatting
+    formats strings correctly [✔]
+    formats lists correctly [✔]
+    formats attribute sets correctly [✔]
+    formats boolean values correctly [✔]
+    formats null correctly [✔]
+    formats let expressions correctly [✔]
+    formats with expressions correctly [✔]
+
+Failures:
+
+  test/NixParserSpec.hs:43:20: 
+  1) NixParser, basic parsing, parses paths
+       unexpected result: Right (NixPath "some/path")
+
+  To rerun use: --match "/NixParser/basic parsing/parses paths/" --seed 1700132962
+
+  test/NixParserSpec.hs:48:20: 
+  2) NixParser, basic parsing, parses let expressions
+       unexpected result: Left (ParseErrorBundle {bundleErrors = TrivialError 16 (Just (Tokens ('x' :| ""))) (fromList [Tokens ('=' :| "")]) :| [], bundlePosState = PosState {pstateInput = "let x = \"1\"; in x", pstateOffset = 0, pstateSourcePos = SourcePos {sourceName = "input", sourceLine = Pos 1, sourceColumn = Pos 1}, pstateTabWidth = Pos 8, pstateLinePrefix = ""}})
+
+  To rerun use: --match "/NixParser/basic parsing/parses let expressions/" --seed 1700132962
+
+Randomized with seed 1700132962
+
+Finished in 0.0014 seconds
+17 examples, 2 failures
+Test suite formatnix-test: FAIL
+Test suite logged to: /home/bibi/Projects/formatnix/dist-newstyle/build/x86_64-linux/ghc-9.6.5/formatnix-0.1.0.0/t/formatnix-test/test/formatnix-0.1.0.0-formatnix-test.log

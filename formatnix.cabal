@@ -1,0 +1,64 @@
+cabal-version:   3.0
+name:            formatnix
+version:         0.1.0.0
+license:         MIT
+license-file:    LICENSE
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+category:        Development
+maintainer:      bennyforeman1@gmail.com
+description:     Custom formatter for Nix expressions
+synopsis:        Format Nix expressions
+
+common common-options
+  default-language: Haskell2010
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-home-modules -Wpartial-fields
+    -Wredundant-constraints
+
+library
+  import:             common-options
+  hs-source-dirs:     src
+  exposed-modules:    NixParser
+  build-depends:
+    , base                ^>=4.18.2.1
+    , megaparsec          ^>=9.3.0
+    , parser-combinators  ^>=1.3.0
+    , text                ^>=2.0.2
+
+  default-extensions:
+    LambdaCase
+    OverloadedStrings
+
+executable formatnix
+  import:             common-options
+  main-is:            Main.hs
+  other-modules:      NixParser
+  hs-source-dirs:     src
+  build-depends:
+    , base                ^>=4.18.2.1
+    , containers          ^>=0.6.7.1
+    , directory           ^>=1.3.7.1
+    , filepath            ^>=1.4.2.2
+    , megaparsec          ^>=9.3.0
+    , mtl                 ^>=2.3.1
+    , parser-combinators  ^>=1.3.0
+    , prettyprinter       ^>=1.7.1
+    , text                ^>=2.0.2
+
+  default-extensions: OverloadedStrings
+
+test-suite formatnix-test
+  import:         common-options
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is:        Spec.hs
+  other-modules:  NixParserSpec
+  build-depends:
+    , base       ^>=4.18.2.1
+    , formatnix
+    , hspec      ^>=2.11.7
+    , text       ^>=2.0.2
+
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
